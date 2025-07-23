@@ -1,6 +1,8 @@
-from PIL import Image
-from lib.image_utils import crop_square, prepare_image, tensor_to_pil
 import torch
+from PIL import Image
+
+from lib.image_utils import crop_square, prepare_image, tensor_to_pil
+
 
 def test_crop_square():
     """Ensures image is cropped to square correctly."""

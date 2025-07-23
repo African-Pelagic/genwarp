@@ -1,7 +1,8 @@
-from PIL import Image
-import torch
-from torchvision.transforms.functional import to_tensor, to_pil_image
 import numpy as np
+import torch
+from PIL import Image
+from torchvision.transforms.functional import to_pil_image, to_tensor
+
 
 def crop_square(img: Image.Image) -> Image.Image:
     W, H = img.size

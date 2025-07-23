@@ -1,8 +1,11 @@
-import torch
 from unittest.mock import MagicMock
-from libprocessor import run_genwarp_pipeline
-from lib.image_utils import prepare_image
+
+import torch
+from lib.processor import run_genwarp_pipeline
 from PIL import Image
+
+from lib.image_utils import prepare_image
+
 
 def test_run_genwarp_pipeline():
     """Tests GenWarp pipeline with mocked models."""

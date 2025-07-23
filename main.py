@@ -1,22 +1,15 @@
-import os
 import logging
-import boto3
-from urllib.parse import urlparse
-from io import BytesIO
-from PIL import Image
-import torch
-from torchvision.transforms.functional import to_tensor, to_pil_image
-import numpy as np
-import torch.nn.functional as F
-from genwarp import GenWarp
-from extern.ZoeDepth.zoedepth.models.zoedepth import ZoeDepth
-from extern.ZoeDepth.zoedepth.utils.misc import colorize
+import os
+import sys
 
+from genwarp import GenWarp
 
 if __name__ == "__main__":
     import sys
-    from image_utils import prepare_image
-    from s3_utils import download_image_from_s3, upload_image_to_s3
+
+    from lib.image_utils import prepare_image
+    from lib.s3_utils import download_image_from_s3, upload_image_to_s3
+    from lib.processor import initialize_models, run_genwarp_pipeline
 
     s3_uris = sys.argv[1:]
     if not s3_uris:

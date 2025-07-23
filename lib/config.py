@@ -1,6 +1,5 @@
-import os
 import logging
-
+import os
 
 S3_REGION = os.environ.get("AWS_REGION", "us-east-1")
 S3_INPUT_BUCKET = os.environ.get("S3_INPUT_BUCKET")

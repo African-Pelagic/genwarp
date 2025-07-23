@@ -1,8 +1,12 @@
 import io
 from unittest import mock
-from PIL import Image
+
 import pytest
-from lib.s3_utils import parse_s3_path, download_image_from_s3, upload_image_to_s3
+from PIL import Image
+
+from lib.s3_utils import (download_image_from_s3, parse_s3_path,
+                          upload_image_to_s3)
+
 
 @pytest.fixture
 def mock_s3():
@@ -17,8 +21,8 @@ def test_parse_s3_path():
 
 def test_download_image_from_s3(mock_s3):
     """Mimics an S3 download and checks for PIL.Image return."""
-    with mock_s3() as s3_mock:
-        client = s3_mock.return_value
+    with mock.patch("lib.s3_utils.s3_client") as s3_mock:
+        client = s3_mock
         image_bytes = io.BytesIO()
         Image.new("RGB", (64, 64)).save(image_bytes, format="JPEG")
         client.get_object.return_value = {"Body": io.BytesIO(image_bytes.getvalue())}
@@ -27,7 +31,10 @@ def test_download_image_from_s3(mock_s3):
 
 def test_upload_image_to_s3(mock_s3):
     """Tests image upload by checking S3 client 'put_object' is called."""
-    with mock_s3() as s3_mock:
-        client = s3_mock.return_value
-        upload_image_to_s3(Image.new("RGB", (64, 64)), "s3://test-bucket/abc123/input.jpg")
-        assert client.put_object.called
+    with mock.patch("lib.s3_utils.s3_client") as s3_mock:
+        client = s3_mock
+        image_bytes = io.BytesIO()
+        img = Image.new("RGB", (64, 64))
+        img.save(image_bytes, format='JPEG')
+        upload_image_to_s3(img, "s3://test-bucket/abc123/input.jpg")
+        assert client.upload_fileobj.called

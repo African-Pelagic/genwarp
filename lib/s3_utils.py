@@ -1,9 +1,16 @@
-from urllib.parse import urlparse
 from io import BytesIO
-from PIL import Image
-import boto3
+from urllib.parse import urlparse
+from logging import getLogger
+import os
 
-s3_client = boto3.client("s3", region_name=S3_REGION)
+import boto3
+from PIL import Image
+
+from lib import config
+
+logger = getLogger(__file__)
+
+s3_client = boto3.client("s3", region_name=config.S3_REGION)
 
 def parse_s3_path(s3_uri):
     """Parse s3://bucket/key URI into (bucket, key)"""
@@ -30,6 +37,8 @@ def upload_image_to_s3(image: Image.Image, source_s3_uri: str):
     
     buf = BytesIO()
     image_format = filename.split(".")[-1].upper()
+    if image_format == 'JPG':
+        image_format = 'JPEG'
     image.save(buf, format=image_format)
     buf.seek(0)
 

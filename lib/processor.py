@@ -1,17 +1,18 @@
-import os
 import logging
-import boto3
-from urllib.parse import urlparse
+import os
 from io import BytesIO
-from PIL import Image
-import torch
-from torchvision.transforms.functional import to_tensor, to_pil_image
+from urllib.parse import urlparse
+
+import boto3
 import numpy as np
+import torch
 import torch.nn.functional as F
+from PIL import Image
+from torchvision.transforms.functional import to_pil_image, to_tensor
+
 from genwarp import GenWarp
-from extern.ZoeDepth.zoedepth.models.zoedepth import ZoeDepth
-from extern.ZoeDepth.zoedepth.utils.misc import colorize
 from lib.config import *
+from lib.image_utils import image_to_device
 
 
 def initialize_models():
