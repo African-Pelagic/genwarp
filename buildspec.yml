@@ -3,7 +3,7 @@ version: 0.2
 
 env:
   variables:
-    ECR_REGISTRY: 733075603663.dkr.ecr.us-east-1.amazonaws.com
+    ECR_REGISTRY: 733075603663.dkr.ecr.eu-west-1.amazonaws.com
     ECR_REPOSITORY: genwarp
     IMAGE_TAG: latest
     AWS_REGION: eu-west-1
@@ -13,8 +13,6 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - echo "ECR_REGISTRY=$ECR_REGISTRY"
-      - echo "AWS_REGION=$AWS_REGION"
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
 
   build:
