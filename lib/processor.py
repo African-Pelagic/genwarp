@@ -22,7 +22,7 @@ def initialize_models():
     genwarp_cfg = dict(
         pretrained_model_path=GENWARP_MODEL_DIR,
         checkpoint_name=GENWARP_CHECKPOINT_NAME,
-        half_precision_weights=True
+        half_precision_weights=False
     )
     genwarp = GenWarp(cfg=genwarp_cfg)
     return zoe, genwarp

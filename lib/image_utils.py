@@ -19,6 +19,6 @@ def prepare_image(image: Image.Image, res: int) -> torch.Tensor:
 def tensor_to_pil(tensor: torch.Tensor) -> Image.Image:
     return to_pil_image(tensor.squeeze(0).clamp(0, 1))
 
-def image_to_device(image: torch.Tensor, device: str, half: bool = True) -> torch.Tensor:
+def image_to_device(image: torch.Tensor, device: str, half: bool = False) -> torch.Tensor:
     image = image.to(device)
     return image.half() if half else image
