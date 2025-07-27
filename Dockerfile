@@ -48,7 +48,7 @@ RUN pip install --upgrade pip setuptools==69.5.1 ninja && \
     pip install -r requirements.txt
 
 # -- ensure splatting is compiled against the right torch version
-RUN pip install --no-cache-dir --no-binary :all: git+https://github.com/pesser/splatting
+RUN pip install --no-cache-dir --no-binary :all: git+https://github.com/African-Pelagic/splatting
 
 # --- Clone ZoeDepth before copying the rest (to isolate caching) ---
 RUN mkdir -p extern && \
