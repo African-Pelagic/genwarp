@@ -4,6 +4,8 @@ import sys
 
 from genwarp import GenWarp
 
+logger = logging.getLogger(__file__)
+
 if __name__ == "__main__":
     import sys
 
