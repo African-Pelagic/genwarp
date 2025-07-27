@@ -10,6 +10,7 @@ if __name__ == "__main__":
     from lib.image_utils import prepare_image
     from lib.s3_utils import download_image_from_s3, upload_image_to_s3
     from lib.processor import initialize_models, run_genwarp_pipeline
+    from lib.config import IMAGE_RES
 
     s3_uris = sys.argv[1:]
     if not s3_uris:
