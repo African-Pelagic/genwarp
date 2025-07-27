@@ -7,7 +7,6 @@ scipy
 opencv-python
 omegaconf
 einops
-git+https://github.com/pesser/splatting
 roma
 jaxtyping
 boto3>=1.24.0
