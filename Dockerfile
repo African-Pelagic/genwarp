@@ -44,8 +44,11 @@ WORKDIR /home/${USER_NAME}/app
 COPY --chown=${USER_NAME}:${GROUP_NAME} requirements.txt ./
 
 # --- Install dependencies early (cached) ---
-RUN pip install --upgrade pip setuptools==69.5.1 ninja && \
-    pip install -r requirements.txt
+RUN pip install --upgrade pip setuptools==69.5.1 ninja
+
+
+# --- install requirements wiht torch pinned to cuda
+RUN pip install -r requirements.txt
 
 # -- ensure splatting is compiled against the right torch version
 RUN pip install --no-cache-dir --no-binary :all: git+https://github.com/African-Pelagic/splatting
